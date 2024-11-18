@@ -1,4 +1,7 @@
 import React, { useState } from "react";
+import Navbar from '../components/Navbar';
+import Footer from '../components/Footer';
+
 
 function UserProfile() {
     const [user, setUser] = useState({
@@ -21,6 +24,8 @@ function UserProfile() {
     };
 
 return (
+    <div>
+        <Navbar />
         <div className="flex flex-col items-center p-6 bg-gray-100 min-h-screen">
         <div className="card w-full max-w-lg bg-white shadow-xl">
             <figure className="px-10 pt-10">
@@ -101,6 +106,8 @@ return (
             </form>
             </div>
         </div>
+    </div>
+    <Footer />
     </div>
 );
 }

@@ -12,6 +12,8 @@ import AddItem from './pages/AddItem';
 import UserProfile from './pages/UserProfile';
 import Categorie from './pages/Categorie';
 import Payment from './pages/Payment';
+import ContactUs from './pages/ContactUs';
+import Aboutus from './pages/AboutUs';
 
 const App = () => {
     return (
@@ -26,6 +28,9 @@ const App = () => {
                 <Route path="/userprofile" element={<UserProfile/>} />
                 <Route path="/categorie" element={<Categorie/>} />
                 <Route path="/payment" element={<Payment/>} />
+                <Route path="/contactus" element={<ContactUs/>} />
+                <Route path="/aboutus" element={<Aboutus/>} />
+                
                 {/* <Route path="/about" element={<h1>About</h1>} /> */}
             </Routes>
         </BrowserRouter>

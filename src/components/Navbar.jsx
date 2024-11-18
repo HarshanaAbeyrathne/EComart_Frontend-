@@ -20,8 +20,8 @@ const Navbar = () => {
                     <li><a onClick={() => navigate('/additem')}>Sell/Donate</a></li>
                     <li><a onClick={() => navigate('/home')}>Buy</a></li>
                     <li><a onClick={() => navigate('/home')}>Bidding</a></li>
-                    <li><a onClick={() => navigate('/home')}>Contact Us</a></li>
-                    <li><a onClick={() => navigate('/home')}>About Us</a></li>
+                    <li><a onClick={() => navigate('/contactus')}>Contact Us</a></li>
+                    <li><a onClick={() => navigate('/aboutus')}>About Us</a></li>
                 </ul>
             </div>
 
@@ -72,13 +72,20 @@ const Navbar = () => {
 
                 {/* Conditional Rendering */}
                 {isLoggedIn ? (
-                    // If user is logged in, show profile picture
-                    <div className="avatar">
-                        <div className="ring-primary ring-offset-base-100 w-10 rounded-full ring ring-offset-2">
-                            <img src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" alt="Profile" />
-                            
-                        </div>
-                    </div>
+        // If user is logged in, show profile picture
+        <div className="avatar">
+            <div
+                className="ring-primary ring-offset-base-100 w-10 rounded-full ring ring-offset-2 cursor-pointer"
+                onClick={() => navigate('/userprofile')}
+                role="button"
+                tabIndex={0}
+            >
+                <img
+                    src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
+                    alt="Profile"
+                />
+            </div>
+        </div>
                 ) : (
                     // If user is not logged in, show login and sign-in buttons
                     <div>
