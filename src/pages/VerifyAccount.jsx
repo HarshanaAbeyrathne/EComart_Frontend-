@@ -3,7 +3,7 @@ import image3 from "../assets/images/ecomart_logo.png"; // Adjust the path based
 
 function VerifyAccount() {
   return (
-    <div className="flex min-h-screen">
+    <div className="flex min-h-screen font-poppins">
       {/* Left Side: Verification Form */}
       <div className="flex flex-col justify-center items-center w-1/2 bg-white p-10">
         <h2 className="text-center text-2xl font-bold text-gray-900 mb-4">

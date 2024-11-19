@@ -4,9 +4,9 @@ import { useNavigate } from "react-router-dom";
 
 // compornents
 import Navbar from '../components/Navbar';
+import Footer from '../components/Footer';
 import SearchBar from '../components/searchBar';
 import ItemDisplay from '../components/ItemDisplay';
-import Footer from '../components/Footer';
 
 import homeImage from '../assets/images/home.png';
 
@@ -14,7 +14,7 @@ const HomePage = () => {
     const navigate = useNavigate();
 
     return (
-        <div className="bg-white min-h-screen">
+        <div className="bg-white min-h-screen font-poppins">
             <Navbar />
             <SearchBar />
             <div className="container mx-auto px-4 py-16">
@@ -49,6 +49,8 @@ const HomePage = () => {
             </div>
 
             {/* items */}
+            <h1 className="text-2xl font-bold text-center mb-8 bg-green-100">Most Recent Products</h1>
+
             <ItemDisplay/>
                 
             {/* Footer */}

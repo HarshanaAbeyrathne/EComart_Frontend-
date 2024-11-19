@@ -6,7 +6,7 @@ import homeImage from "../assets/images/ecomart_logo.png";
 function Footer() {
     const navigate = useNavigate();
 return (
-    <div>
+    <div className="font-poppins">
         <footer className="footer bg-base-200 text-base-content p-10">
             <aside>
             {/* logo */}

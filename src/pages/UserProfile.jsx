@@ -26,8 +26,8 @@ function UserProfile() {
 return (
     <div>
         <Navbar />
-        <div className="flex flex-col items-center p-6 bg-gray-100 min-h-screen">
-        <div className="card w-full max-w-lg bg-white shadow-xl">
+        <div className="font-poppins flex flex-col items-center p-6 bg-white min-h-screen">
+        <div className="card w-full max-w-lg bg-green-100 shadow-xl">
             <figure className="px-10 pt-10">
             <img
                 src="https://via.placeholder.com/150"
@@ -99,7 +99,7 @@ return (
                 />
                 </div>
                 <div className="form-control mt-6">
-                <button type="submit" className="btn btn-primary w-full">
+                <button type="submit" className="btn bg-green-300 hover:bg-green-500 w-full">
                     Save
                 </button>
                 </div>

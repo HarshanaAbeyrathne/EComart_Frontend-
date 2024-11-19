@@ -14,6 +14,7 @@ import Categorie from './pages/Categorie';
 import Payment from './pages/Payment';
 import ContactUs from './pages/ContactUs';
 import Aboutus from './pages/AboutUs';
+import Buy from './pages/Buy'
 
 const App = () => {
     return (
@@ -30,6 +31,8 @@ const App = () => {
                 <Route path="/payment" element={<Payment/>} />
                 <Route path="/contactus" element={<ContactUs/>} />
                 <Route path="/aboutus" element={<Aboutus/>} />
+                <Route path="/buy" element={<Buy/>} />
+
                 
                 {/* <Route path="/about" element={<h1>About</h1>} /> */}
             </Routes>

@@ -18,7 +18,7 @@ const Navbar = () => {
                     <li><a onClick={() => navigate('/home')}>Home</a></li>
                     <li><a onClick={() => navigate('/categorie')}>Categories</a></li>
                     <li><a onClick={() => navigate('/additem')}>Sell/Donate</a></li>
-                    <li><a onClick={() => navigate('/home')}>Buy</a></li>
+                    <li><a onClick={() => navigate('/buy')}>Buy</a></li>
                     <li><a onClick={() => navigate('/home')}>Bidding</a></li>
                     <li><a onClick={() => navigate('/contactus')}>Contact Us</a></li>
                     <li><a onClick={() => navigate('/aboutus')}>About Us</a></li>

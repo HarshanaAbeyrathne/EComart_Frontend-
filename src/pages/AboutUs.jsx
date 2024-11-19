@@ -7,7 +7,7 @@ import secondhandImage from '../assets/images/SecondHand.png';
 
 const AboutUs = () => {
   return (
-    <div className="min-h-screen flex flex-col bg-gray-100">
+    <div className="min-h-screen flex flex-col bg-gray-100 font-poppins">
       <Navbar />
       <div className="flex-grow container mx-auto p-6">
         <h2 className="text-4xl font-bold text-center text-green-700 mb-8">About Us</h2>
