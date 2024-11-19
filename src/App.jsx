@@ -15,12 +15,13 @@ import Payment from './pages/Payment';
 import ContactUs from './pages/ContactUs';
 import Aboutus from './pages/AboutUs';
 import Buy from './pages/Buy'
+import Cart from './pages/Cart';
 
 const App = () => {
     return (
         <BrowserRouter>
             <Routes>
-                <Route path="/" element={<Navigate to="/home" />} />
+                <Route path="/" exact element={<Navigate to="/home" />} />
                 <Route path="/home" element={<Home/>} />
                 <Route path="/login" element={<Login/>} />
                 <Route path="/signup" element={<Signup/>} />
@@ -32,6 +33,7 @@ const App = () => {
                 <Route path="/contactus" element={<ContactUs/>} />
                 <Route path="/aboutus" element={<Aboutus/>} />
                 <Route path="/buy" element={<Buy/>} />
+                <Route path="/cart" element={<Cart/>} />
 
                 
                 {/* <Route path="/about" element={<h1>About</h1>} /> */}
