@@ -10,7 +10,7 @@ function SearchBar() {
     };
 
     return (
-        <div className="bg-white p-4 shadow-md flex items-center justify-between space-x-4">
+        <div className="bg-white p-4 shadow-md flex items-center justify-between space-x-4 font-poppins">
             {/* Logo Section */}
             <div className="flex items-center space-x-2">
                 <img

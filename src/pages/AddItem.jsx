@@ -4,7 +4,7 @@
 
     function AddItem() {
     return (
-        <div>
+        <div className="font-poppins">
         {/* Navbar Component */}
         <Navbar />
         
@@ -16,14 +16,14 @@
         <div className="w-full max-w-4xl bg-gray-100 shadow-md rounded-lg p-5">
             {/* Photos and Videos */}
             <div className="mb-6">
-            <h2 className="text-lg font-semibold mb-2">Photos and Videos</h2>
+            <h2 className="text-lg font-semibold mb-2">Photo</h2>
             <div className="flex space-x-4">
                 <div className="w-1/2 h-32 border border-dashed flex items-center justify-center text-gray-500">
                 <button className="btn bg-green-300 hover:bg-green-400">Add Photos</button>
                 </div>
-                <div className="w-1/2 h-32 border border-dashed flex items-center justify-center text-gray-500">
+                {/* <div className="w-1/2 h-32 border border-dashed flex items-center justify-center text-gray-500">
                 <button className="btn bg-green-300 hover:bg-green-400">Add Video</button>
-                </div>
+                </div> */}
             </div>
             </div>
 

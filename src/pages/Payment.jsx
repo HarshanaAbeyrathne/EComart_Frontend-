@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import Navbar from '../components/Navbar';
+import Footer from '../components/Footer';
 
 function Payment() {
   const [paymentDetails, setPaymentDetails] = useState({
@@ -36,6 +38,8 @@ function Payment() {
   };
 
   return (
+    <div className='font-poppins'>
+      <Navbar/>
     <div className="min-h-screen bg-white flex items-center justify-center">
       <div className="w-full max-w-md bg-green-100 p-8 rounded-lg shadow-lg">
         <h2 className="text-2xl font-bold text-center text-green-600 mb-6">Payment Details</h2>
@@ -93,6 +97,8 @@ function Payment() {
           <button type="submit" className="btn btn-primary w-full bg-green-600 hover:bg-green-700 text-white">Submit Payment</button>
         </form>
       </div>
+    </div>
+    <Footer/>
     </div>
   );
 }

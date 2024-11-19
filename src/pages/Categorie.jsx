@@ -31,7 +31,7 @@ function Categorie() {
   };
 
   return (
-    <div>
+    <div className='font-poppins'>
       <Navbar />
       <div className="flex">
         <div className="w-1/4 p-4 bg-gray-100 sticky top-0 h-screen overflow-y-auto">

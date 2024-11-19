@@ -30,7 +30,7 @@ const ContactUs = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen flex flex-col font-poppins">
       <Navbar />
       <div className="flex-grow container  mx-auto p-6">
         <h2 className="text-3xl font-bold text-center text-green-600 mb-6">Contact Us</h2>
