@@ -1,13 +1,41 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import image3 from "../assets/images/ecomart_logo.png"; // Adjust the path as per your project structure
 
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
-  const handleLogin = () => {
-    // Handle login functionality here
-    console.log("Email:", email, "Password:", password);
+  const handleLogin = async () => {
+    setLoading(true);
+    setError(null);
+
+    try {
+      const response = await fetch("/api/auth/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, password }),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.message || "Failed to login");
+      }
+
+      const data = await response.json();
+      localStorage.setItem("token", data.token); // Store token in localStorage
+      alert("Login successful!");
+      navigate("/dashboard"); // Navigate to a protected route after login
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -86,11 +114,16 @@ function Login() {
               type="button"
               className="flex w-full justify-center rounded-md bg-green-500 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-green-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
               onClick={handleLogin}
-              
+              disabled={loading}
             >
-              Sign in
+              {loading ? "Signing in..." : "Sign in"}
             </button>
           </div>
+
+          {/* Error Message */}
+          {error && (
+            <p className="mt-4 text-center text-sm text-red-500">{error}</p>
+          )}
 
           {/* Signup Link */}
           <p className="mt-10 text-center text-sm text-gray-500">

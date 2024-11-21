@@ -1,25 +1,34 @@
 import React from "react";
+import PropTypes from "prop-types";
 
-function item({ title, description, price }) {
-return (
+function Item({ title, description, price, image }) {
+  return (
     <div className="card bg-white w-76 shadow-xl font-poppins">
-            <figure className="px-10 pt-10">
-                <img
-                    src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
-                    alt={title}
-                    className="rounded-xl"
-                />
-            </figure>
-            <div className="card-body items-center text-center">
-                <h2 className="card-title">{title}</h2>
-                <p>{description}</p>
-                <h2 className="text-red-600 text-2xl">{price}</h2>
-                <div className="card-actions">
-                    <button className="btn btn-accent">Buy Now</button>
-                </div>
-            </div>
+      <figure className="px-10 pt-10">
+        <img
+          src={image || "https://via.placeholder.com/150"} // Fallback for missing image
+          alt={title}
+          className="rounded-xl"
+        />
+      </figure>
+      <div className="card-body items-center text-center">
+        <h2 className="card-title">{title}</h2>
+        <p>{description}</p>
+        <h2 className="text-red-600 text-2xl">{price}</h2>
+        <div className="card-actions">
+          <button className="btn btn-accent">Buy Now</button>
         </div>
-);
+      </div>
+    </div>
+  );
 }
 
-export default item;
+// Prop validation
+Item.propTypes = {
+  title: PropTypes.string.isRequired,
+  description: PropTypes.string.isRequired,
+  price: PropTypes.string.isRequired,
+  image: PropTypes.string, // Optional
+};
+
+export default Item;
