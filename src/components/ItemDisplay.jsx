@@ -10,16 +10,18 @@ function ItemDisplay({ isLoggedIn }) {
   const [error, setError] = useState(null); // Error state
   const [selectedProduct, setSelectedProduct] = useState(null); // Modal state
 
-  // Fetch items from backend
+  // Fetch items from backend API
   useEffect(() => {
     const fetchItems = async () => {
       setLoading(true);
       setError(null);
       try {
-        const response = await fetch("/api/items"); // Adjust the API endpoint
-        if (!response.ok) throw new Error("Failed to fetch items");
+        const response = await fetch("/api/items"); // API endpoint for fetching items
+        if (!response.ok) {
+          throw new Error(`Failed to fetch items: ${response.statusText}`);
+        }
         const data = await response.json();
-        setItems(data.items); // Assuming the response has a key 'items'
+        setItems(data.items); // Assuming the API returns { items: [] }
       } catch (err) {
         setError(err.message);
       } finally {
@@ -30,6 +32,7 @@ function ItemDisplay({ isLoggedIn }) {
     fetchItems();
   }, []);
 
+  // Handle when a product is clicked
   const handleProductClick = (item) => {
     if (isLoggedIn) {
       console.log(`Logged-in user clicked on: ${item.title}`);
@@ -47,11 +50,20 @@ function ItemDisplay({ isLoggedIn }) {
     navigate("/login"); // Redirect to the login page
   };
 
-  const addToCart = (item) => {
-    const existingCart = JSON.parse(localStorage.getItem("cart")) || [];
-    const updatedCart = [...existingCart, { ...item, quantity: 1 }];
-    localStorage.setItem("cart", JSON.stringify(updatedCart));
-    alert(`${item.title} has been added to your cart.`);
+  const addToCart = async (item) => {
+    try {
+      const response = await fetch("/api/cart/add", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ ...item, quantity: 1 }),
+      });
+      if (!response.ok) {
+        throw new Error("Failed to add item to cart");
+      }
+      alert(`${item.title} has been added to your cart.`);
+    } catch (err) {
+      alert(err.message);
+    }
   };
 
   return (
