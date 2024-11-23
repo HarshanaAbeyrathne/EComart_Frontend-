@@ -47,6 +47,13 @@ function ItemDisplay({ isLoggedIn }) {
     navigate("/login"); // Redirect to the login page
   };
 
+  const addToCart = (item) => {
+    const existingCart = JSON.parse(localStorage.getItem("cart")) || [];
+    const updatedCart = [...existingCart, { ...item, quantity: 1 }];
+    localStorage.setItem("cart", JSON.stringify(updatedCart));
+    alert(`${item.title} has been added to your cart.`);
+  };
+
   return (
     <div className="container mx-auto px-4 py-8 bg-green-100 font-poppins">
       {loading ? (
@@ -71,6 +78,7 @@ function ItemDisplay({ isLoggedIn }) {
                 description={item.description}
                 price={item.price}
                 image={item.image} // Pass the image URL from the backend
+                onAddToCart={addToCart} // Pass the add-to-cart handler
               />
             </div>
           ))}

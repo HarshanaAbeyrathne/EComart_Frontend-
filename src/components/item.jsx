@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-function Item({ title, description, price, image }) {
+function Item({ title, description, price, image, onAddToCart }) {
   return (
     <div className="card bg-white w-76 shadow-xl font-poppins">
       <figure className="px-10 pt-10">
@@ -14,9 +14,14 @@ function Item({ title, description, price, image }) {
       <div className="card-body items-center text-center">
         <h2 className="card-title">{title}</h2>
         <p>{description}</p>
-        <h2 className="text-red-600 text-2xl">{price}</h2>
+        <h2 className="text-red-600 text-2xl">${price}</h2>
         <div className="card-actions">
-          <button className="btn btn-accent">Buy Now</button>
+          <button
+            className="btn btn-accent"
+            onClick={() => onAddToCart({ title, description, price, image })}
+          >
+            Add to Cart
+          </button>
         </div>
       </div>
     </div>
@@ -29,6 +34,7 @@ Item.propTypes = {
   description: PropTypes.string.isRequired,
   price: PropTypes.string.isRequired,
   image: PropTypes.string, // Optional
+  onAddToCart: PropTypes.func.isRequired, // Add-to-cart handler
 };
 
 export default Item;
