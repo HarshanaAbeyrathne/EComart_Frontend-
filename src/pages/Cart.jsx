@@ -9,7 +9,12 @@ const Cart = () => {
   // Load cart items from localStorage on mount
   useEffect(() => {
     const savedCart = JSON.parse(localStorage.getItem("cart")) || [];
-    setCartItems(savedCart);
+    // Ensure all prices are numbers
+    const validatedCart = savedCart.map((item) => ({
+      ...item,
+      price: parseFloat(item.price), // Convert price to a number
+    }));
+    setCartItems(validatedCart);
   }, []);
 
   // Recalculate the total price whenever the cart items change
