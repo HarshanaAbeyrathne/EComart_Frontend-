@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import image3 from "../assets/images/ecomart_logo.png"; // Adjust the path as per your project structure
+import axiosInstance from "../axiosInstance";
+
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -12,31 +14,37 @@ function Login() {
   const handleLogin = async () => {
     setLoading(true);
     setError(null);
-
+  
     try {
-      const response = await fetch("/api/auth/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email, password }),
+      const response = await axiosInstance.post("/auth/login", {
+        email,
+        password,
       });
-
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.message || "Failed to login");
+     
+      if(response.data.message === "First login, password is saved and please login again."){
+        alert("First login, password is saved and please login again.");
+        setEmail("");
+        setPassword("");
+      }
+      if(response.data.message === "OTP Sent to your Email"){
+        localStorage.setItem("email", email);
+        alert("OTP Sent to your Email");
+        navigate("/verify");
       }
 
-      const data = await response.json();
-      localStorage.setItem("token", data.token); // Store token in localStorage
+      // Assuming the response contains a token
+      localStorage.setItem("token", response.data.token); // Store token in localStorage
+
       alert("Login successful!");
       navigate("/dashboard"); // Navigate to a protected route after login
     } catch (err) {
-      setError(err.message);
+      // Handle error response
+      setError(err.response?.data?.message || "Failed to login");
     } finally {
       setLoading(false);
     }
   };
+  
 
   return (
     <>
