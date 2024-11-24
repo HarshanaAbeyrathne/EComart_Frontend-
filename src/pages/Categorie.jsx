@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import ItemDisplay from '../components/ItemDisplay';
+import axiosInstance from '../axiosInstance';
 
 function Categorie() {
   const [filters, setFilters] = useState({
@@ -19,22 +20,19 @@ function Categorie() {
     setLoading(true);
     setError(null);
     try {
-      const response = await fetch('/api/items', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(filters),
-      });
-      if (!response.ok) throw new Error('Failed to fetch items');
-      const data = await response.json();
-      setItems(data.items);
+      // Axios handles the response parsing automatically
+      const response = await axiosInstance.get('/item');
+      console.log(response.data);
+      // Assuming the backend returns { items: [...] } in the response
+      setItems(response.data);
     } catch (err) {
-      setError(err.message);
+      // Use Axios' error object for detailed error information
+      setError(err.response?.data?.message || 'Failed to fetch items');
     } finally {
       setLoading(false);
     }
   };
+  
 
   // Handle checkbox changes
   const handleCheckboxChange = (e, filterType) => {
