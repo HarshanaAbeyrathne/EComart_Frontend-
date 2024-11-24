@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import ProductModal from "../modal/SelectRoleModal";
-import Item from "./Item";
+import Item from "./item";
 import { useNavigate } from "react-router-dom";
 import axiosInstance from "../axiosInstance";
 import axios from "axios";
@@ -23,7 +23,7 @@ function ItemDisplay({ isLoggedIn }) {
        
         
         setItems(response.data);
-        console.log(response.data);
+        // console.log(response.data);
 
       } catch (err) {
         setError("Failed to fetch items");
@@ -59,7 +59,7 @@ function ItemDisplay({ isLoggedIn }) {
         <p className="text-center text-gray-500">No items found</p>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-
+          
        
           {items.map((item) => (
     <div

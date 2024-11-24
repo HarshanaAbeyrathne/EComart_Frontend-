@@ -8,7 +8,7 @@ function Item({ title, description, price, image, onAddToCart }) {
         <img
           src={image || "https://via.placeholder.com/150"} // Fallback for missing image
           alt={title}
-          className="rounded-xl"
+          className="rounded-xl w-full h-48 object-cover"
         />
       </figure>
       <div className="card-body items-center text-center">

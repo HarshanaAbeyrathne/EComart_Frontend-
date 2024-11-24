@@ -1,32 +1,21 @@
 import React, { useState } from "react";
 import image3 from "../assets/images/ecomart_logo.png"; // Adjust the path based on your file structure
 import { useNavigate } from "react-router-dom";
+import axiosInstance from "../axiosInstance";
 
 function Signup() {
-  const [type, setType] = useState(true);
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [cpassword, setCpassword] = useState("");
-  const [name, setName] = useState("");
-  const [mobile, setMobile] = useState("");
-  const [address, setAddress] = useState("");
+  const [role, setRole] = useState("buyer");
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
-  // Check if passwords match
-  const checkPassword = (value) => {
-    setCpassword(value);
-    if (password !== value) {
-      setType(false);
-    } else {
-      setType(true);
-    }
-  };
-
-  // Handle signup
   const handleSignup = async () => {
-    if (!type) {
+    if (password !== cpassword) {
       alert("Passwords do not match");
       return;
     }
@@ -35,22 +24,19 @@ function Signup() {
     setError(null);
 
     try {
-      const response = await fetch("/api/auth/signup", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, email, password, mobile, address }),
+      const response = await axiosInstance.post("/user", {
+        firstName,
+        lastName,
+        email,
+        role,
       });
+      
+      console.log(response.data);
 
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.message || "Signup failed");
-      }
-
-      const data = await response.json();
       alert("Signup successful! Please log in.");
       navigate("/login");
     } catch (err) {
-      setError(err.message);
+      setError(err.response?.data?.message || "Signup failed");
     } finally {
       setLoading(false);
     }
@@ -70,66 +56,46 @@ function Signup() {
       </div>
 
       <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-        {/* Name Input */}
+        {/* First Name Input */}
         <div>
           <label
-            htmlFor="name"
+            htmlFor="firstName"
             className="block text-sm font-medium leading-6 text-gray-900"
           >
-            Name
+            First name
           </label>
           <div className="mt-2">
             <input
-              id="name"
-              name="name"
+              id="firstName"
+              name="firstName"
               type="text"
               required
-              onChange={(e) => setName(e.target.value)}
+              value={firstName}
+              onChange={(e) => setFirstName(e.target.value)}
               className="block w-full px-3 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
               style={{ backgroundColor: "white" }}
             />
           </div>
         </div>
 
-        {/* Mobile Number Input */}
+        {/* Last Name Input */}
         <div>
           <label
-            htmlFor="mobile"
+            htmlFor="lastName"
             className="block text-sm font-medium leading-6 text-gray-900"
           >
-            Mobile Number
+            Last name
           </label>
           <div className="mt-2">
             <input
-              id="mobile"
-              name="mobile"
-              type="tel"
+              id="lastName"
+              name="lastName"
+              type="text"
               required
-              onChange={(e) => setMobile(e.target.value)}
+              value={lastName}
+              onChange={(e) => setLastName(e.target.value)}
               className="block w-full px-3 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
               style={{ backgroundColor: "white" }}
-              placeholder="+94 XX XXXX XXX"
-            />
-          </div>
-        </div>
-
-        {/* Address Input */}
-        <div>
-          <label
-            htmlFor="address"
-            className="block text-sm font-medium leading-6 text-gray-900"
-          >
-            Address
-          </label>
-          <div className="mt-2">
-            <textarea
-              id="address"
-              name="address"
-              required
-              onChange={(e) => setAddress(e.target.value)}
-              className="block w-full px-3 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-              style={{ backgroundColor: "white" }}
-              placeholder="Enter your full address"
             />
           </div>
         </div>
@@ -148,6 +114,7 @@ function Signup() {
               name="email"
               type="email"
               required
+              value={email}
               onChange={(e) => setEmail(e.target.value)}
               className="block w-full px-3 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
               placeholder="@gmail.com"
@@ -156,51 +123,26 @@ function Signup() {
           </div>
         </div>
 
-        {/* Password Input */}
+        {/* Role Input */}
         <div>
           <label
-            htmlFor="password"
+            htmlFor="role"
             className="block text-sm font-medium leading-6 text-gray-900"
           >
-            Password
+            Role
           </label>
           <div className="mt-2">
-            <input
-              id="password"
-              name="password"
-              type="password"
-              required
-              onChange={(e) => setPassword(e.target.value)}
-              className="block w-full px-3 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-              style={{ backgroundColor: "white" }}
-            />
+            <select
+              id="role"
+              name="role"
+              value={role}
+              onChange={(e) => setRole(e.target.value)}
+              className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+            >
+              <option value="seller">Seller</option>
+              <option value="buyer">Buyer</option>
+            </select>
           </div>
-        </div>
-
-        {/* Confirm Password Input */}
-        <div>
-          <label
-            htmlFor="cpassword"
-            className="block text-sm font-medium leading-6 text-gray-900"
-          >
-            Confirm Password
-          </label>
-          <div className="mt-2">
-            <input
-              id="cpassword"
-              name="cpassword"
-              type="password"
-              required
-              onChange={(e) => checkPassword(e.target.value)}
-              className="block w-full px-3 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-              style={{ backgroundColor: "white" }}
-            />
-          </div>
-          {!type && (
-            <div className="mt-1 text-sm text-red-500">
-              Passwords do not match.
-            </div>
-          )}
         </div>
 
         {/* Signup Button */}

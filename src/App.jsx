@@ -16,6 +16,7 @@ import ContactUs from './pages/ContactUs';
 import Aboutus from './pages/AboutUs';
 import Buy from './pages/Buy'
 import Cart from './pages/Cart';
+import Bidding from './pages/AuctionItems';
 
 const App = () => {
     return (
@@ -34,7 +35,7 @@ const App = () => {
                 <Route path="/aboutus" element={<Aboutus/>} />
                 <Route path="/buy" element={<Buy/>} />
                 <Route path="/cart" element={<Cart/>} />
-
+                <Route path="/bidding" element={<Bidding/>} />
                 
                 {/* <Route path="/about" element={<h1>About</h1>} /> */}
             </Routes>
