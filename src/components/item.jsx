@@ -32,7 +32,7 @@ function Item({ title, description, price, image, onAddToCart }) {
 Item.propTypes = {
   title: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
-  price: PropTypes.string.isRequired,
+  price: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
   image: PropTypes.string, // Optional
   onAddToCart: PropTypes.func.isRequired, // Add-to-cart handler
 };
