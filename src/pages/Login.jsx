@@ -34,9 +34,10 @@ function Login() {
 
       // Assuming the response contains a token
       localStorage.setItem("token", response.data.token); // Store token in localStorage
+      console.log(response.data.token);
 
       alert("Login successful!");
-      navigate("/dashboard"); // Navigate to a protected route after login
+      navigate("/home"); // Navigate to a protected route after login
     } catch (err) {
       // Handle error response
       setError(err.response?.data?.message || "Failed to login");

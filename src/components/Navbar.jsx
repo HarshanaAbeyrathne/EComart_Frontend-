@@ -19,12 +19,12 @@ const Navbar = () => {
                     <li><a onClick={() => navigate('/categorie')}>Categories</a></li>
                     <li><a onClick={() => navigate('/additem')}>Sell/Donate</a></li>
                     <li><a onClick={() => navigate('/buy')}>Buy</a></li>
-                    <li><a onClick={() => navigate('/home')}>Bidding</a></li>
+                    <li><a onClick={() => navigate('/bidding')}>Bidding</a></li>
                     <li><a onClick={() => navigate('/contactus')}>Contact Us</a></li>
                     <li><a onClick={() => navigate('/aboutus')}>About Us</a></li>
                 </ul>
             </div>
-
+            {/* bidding */}
             {/* Navbar End */}
             <div className="navbar-end flex items-center space-x-4">
                 {/* Notification Button */}
@@ -50,7 +50,7 @@ const Navbar = () => {
 
                 {/* Cart Button */}
                 <div className="dropdown dropdown-end">
-                    <div tabIndex={0} role="button" className="btn btn-ghost btn-circle" onClick={() => navigate('/cart')}>
+                    <div tabIndex={0} role="button" className="btn btn-ghost btn-circle" onClick={() => navigate('/cart')}      >
                         <div className="indicator">
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
