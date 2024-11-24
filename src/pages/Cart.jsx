@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import { useNavigate } from 'react-router-dom';
 
 const Cart = () => {
   const [cartItems, setCartItems] = useState([]);
   const [totalPrice, setTotalPrice] = useState(0);
+  const navigate = useNavigate();
 
   // Load cart items from localStorage on mount
   useEffect(() => {
@@ -41,8 +43,7 @@ const Cart = () => {
 
   // Proceed to payment (placeholder)
   const proceedToPayment = () => {
-    alert("Proceeding to payment...");
-    // Add your payment logic here
+    navigate('/payment');
   };
 
   return (

@@ -14,28 +14,15 @@ function ItemDisplay({ isLoggedIn }) {
 
   // Fetch items from backend API
   useEffect(() => {
-    // const fetchItems = async () => {
-    //   setLoading(true);
-    //   setError(null);
-    //   try {
-    //     const response = await axiosInstance.get("/api/item");
-    //     if (!response.ok) throw new Error("Failed to fetch items");
-    //     const data = await response.json();
-    //     console.log(data);
-    //     setItems(data.items); // Assuming the response has a key 'items'
-    //   } catch (err) {
-    //     setError(err.message);
-    //   } finally {
-    //     setLoading(false);
-    //   }
-    // };
-
+    // Fetch items from the backend
     const fetchItems = async () => {
       setLoading(true);
       setError(null);
       try {
         const response = await axiosInstance.get('/item'); // No need for /api here because baseURL already includes it
-        setItems(response.data); // Assuming response contains { items: [...] }
+       
+        
+        setItems(response.data);
         console.log(response.data);
 
       } catch (err) {
@@ -47,38 +34,17 @@ function ItemDisplay({ isLoggedIn }) {
     fetchItems();
   }, []);
 
-  // Handle when a product is clicked
-  const handleProductClick = (item) => {
-    // if (isLoggedIn) {
-    //   console.log(`Logged-in user clicked on: ${item.title}`);
-    //   navigate(`/products/${item.id}`); // Navigate to product details page
-    // } else {
-    //   setSelectedProduct(item); // Show modal if user is not logged in
-    // }
-    setSelectedProduct(item);
-  };
-
-  const handleCloseModal = () => {
-    setSelectedProduct(null); // Close the modal
-  };
-
-  const handleLoginRedirect = () => {
-    navigate("/login"); // Redirect to the login page
-  };
-
-  const addToCart = async (item) => {
+  const addToCart = (item) => {
     try {
-      const response = await fetch("/api/cart/add", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...item, quantity: 1 }),
-      });
-      if (!response.ok) {
-        throw new Error("Failed to add item to cart");
-      }
+      // Get the existing cart from local storage or initialize an empty array
+      const cart = JSON.parse(localStorage.getItem("cart")) || [];
+      // Add the new item to the cart
+      cart.push({ ...item, quantity: 1 });
+      // Save the updated cart back to local storage
+      localStorage.setItem("cart", JSON.stringify(cart));
       alert(`${item.title} has been added to your cart.`);
     } catch (err) {
-      alert(err.message);
+      alert("Failed to add item to cart");
     }
   };
 
@@ -88,7 +54,7 @@ function ItemDisplay({ isLoggedIn }) {
         <p className="text-center text-gray-500">Loading...</p>
       ) : error ? (
         
-        <p className="text-center text-red-500">{error}  <div> huknw</div> </p>
+        <p className="text-center text-red-500">{error}  <div> dd</div> </p>
       ) : items.length === 0 ? (
         <p className="text-center text-gray-500">No items found</p>
       ) : (
@@ -96,19 +62,19 @@ function ItemDisplay({ isLoggedIn }) {
 
        
           {items.map((item) => (
-            <div
-              key={item.id}
-              role="button"
-              tabIndex="0"
-              className="cursor-pointer"
-              onClick={() => handleProductClick(item)}
-              onKeyDown={(e) => e.key === "Enter" && handleProductClick(item)}
-            >
+    <div
+    key={item._id} // Unique key
+    role="button"
+    tabIndex="0"
+    className="cursor-pointer"
+    // onClick={() => handleProductClick(item)}
+    onKeyDown={(e) => e.key === "Enter" && handleProductClick(item)}
+  >
               <Item
                 title={item.title}
                 description={item.description}
-                price={item.price}
-                image={item.image} // Pass the image URL from the backend
+                price={String(item.price)}
+                image={`http://localhost:3100${item.photo}`} 
                 onAddToCart={addToCart} // Pass the add-to-cart handler
               />
             </div>

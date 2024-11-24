@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
+import axiosInstance from "../axiosInstance";
 
 function AddItem() {
   // State for form inputs
@@ -28,12 +29,11 @@ function AddItem() {
     setFormData({ ...formData, photo: e.target.files[0] });
   };
 
-  // Submit form to backend
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError(null);
     setSuccessMessage("");
-
+  
     // Create a FormData object for file upload
     const formDataToSubmit = new FormData();
     formDataToSubmit.append("title", formData.title);
@@ -46,36 +46,34 @@ function AddItem() {
     if (formData.photo) {
       formDataToSubmit.append("photo", formData.photo);
     }
-
-       // Log the FormData object for debugging (optional)
-       for (const [key, value] of formDataToSubmit.entries()) {
-        console.log(`${key}: ${value}`);
-    }
-
+  
     try {
-      const response = await fetch("/api/items", {
-        method: "POST",
-        body: formDataToSubmit,
-      });
-
-      if (!response.ok) {
-        throw new Error("Failed to submit the listing");
+      const response = await axiosInstance.post("/item", formDataToSubmit);
+      if (response.status === 200 || response.status === 201) {
+        // Success case
+        setSuccessMessage("Listing created successfully!");
+        setFormData({
+          title: "",
+          subtitle: "",
+          category: "Fashion > Men's Clothes",
+          description: "",
+          quantity: "",
+          pricingType: "fixed",
+          price: "",
+          photo: null,
+        });
+      } else {
+        throw new Error("Unexpected server response");
       }
-
-      const data = await response.json();
-      setSuccessMessage("Listing created successfully!");
-      setFormData({
-        title: "",
-        subtitle: "",
-        category: "Fashion > Men's Clothes",
-        description: "",
-        quantity: "",
-        pricingType: "fixed",
-        price: "",
-        photo: null,
-      });
     } catch (err) {
-      setError(err.message);
+      // Handle and display specific error message
+      if (err.response && err.response.data && err.response.data.error) {
+        // If the error comes from the server and includes a specific error message
+        setError(err.response.data.error);
+      } else {
+        // General fallback for unexpected errors
+        setError(err.message || "An unexpected error occurred");
+      }
     }
   };
 
