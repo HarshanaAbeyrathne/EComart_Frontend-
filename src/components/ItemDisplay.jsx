@@ -12,7 +12,7 @@ function ItemDisplay({ isLoggedIn }) {
   const [error, setError] = useState(null); // Error state
   const [selectedProduct, setSelectedProduct] = useState(null); // Modal state
 
-  // Fetch items from backend
+  // Fetch items from backend API
   useEffect(() => {
     // const fetchItems = async () => {
     //   setLoading(true);
@@ -37,6 +37,7 @@ function ItemDisplay({ isLoggedIn }) {
         const response = await axiosInstance.get('/item'); // No need for /api here because baseURL already includes it
         setItems(response.data); // Assuming response contains { items: [...] }
         console.log(response.data);
+
       } catch (err) {
         setError("Failed to fetch items");
       } finally {
@@ -46,6 +47,7 @@ function ItemDisplay({ isLoggedIn }) {
     fetchItems();
   }, []);
 
+  // Handle when a product is clicked
   const handleProductClick = (item) => {
     // if (isLoggedIn) {
     //   console.log(`Logged-in user clicked on: ${item.title}`);
@@ -64,11 +66,20 @@ function ItemDisplay({ isLoggedIn }) {
     navigate("/login"); // Redirect to the login page
   };
 
-  const addToCart = (item) => {
-    const existingCart = JSON.parse(localStorage.getItem("cart")) || [];
-    const updatedCart = [...existingCart, { ...item, quantity: 1 }];
-    localStorage.setItem("cart", JSON.stringify(updatedCart));
-    alert(`${item.title} has been added to your cart.`);
+  const addToCart = async (item) => {
+    try {
+      const response = await fetch("/api/cart/add", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ ...item, quantity: 1 }),
+      });
+      if (!response.ok) {
+        throw new Error("Failed to add item to cart");
+      }
+      alert(`${item.title} has been added to your cart.`);
+    } catch (err) {
+      alert(err.message);
+    }
   };
 
   return (
