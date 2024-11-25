@@ -43,7 +43,15 @@ const Cart = () => {
 
   // Proceed to payment (placeholder)
   const proceedToPayment = () => {
-    navigate('/payment');
+    localStorage.setItem(
+      "orderData",
+      JSON.stringify({
+        items: cartItems,
+        total: totalPrice,
+      })
+    );
+    navigate("/payment");
+   
   };
 
   return (

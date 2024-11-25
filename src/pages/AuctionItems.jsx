@@ -33,6 +33,7 @@ const AuctionItems = () => {
             description={item.description}
             price={item.highestBid.amount}
             image={`http://localhost:3100${item.photo}`} 
+            itemId={item._id}
             onAddToCart={() => console.log('Add to cart clicked')}
           />
         ))}

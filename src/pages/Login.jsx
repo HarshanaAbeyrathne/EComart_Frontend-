@@ -31,13 +31,10 @@ function Login() {
         alert("OTP Sent to your Email");
         navigate("/verify");
       }
-
+      console.log(response.data);
       // Assuming the response contains a token
-      localStorage.setItem("token", response.data.token); // Store token in localStorage
-      console.log(response.data.token);
-
-      alert("Login successful!");
-      navigate("/home"); // Navigate to a protected route after login
+      // localStorage.setItem("token", response.data.token); // Store token in localStorage
+      // console.log(response.data.token);
     } catch (err) {
       // Handle error response
       setError(err.response?.data?.message || "Failed to login");
