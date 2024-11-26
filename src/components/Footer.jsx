@@ -16,7 +16,7 @@ return (
                 className="w-40 h-40 object-contain"
             />
             <p>
-                EComart.
+                Ecomart.
                 <br />
                 All rights reserved.
             </p>
