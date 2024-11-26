@@ -1,15 +1,21 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from "react-router-dom";
 
 const Navbar = () => {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const navigate = useNavigate();
 
+    useEffect(() => {
+        // Check for token in localStorage
+        const token = localStorage.getItem('token');
+        setIsLoggedIn(!!token); // Set isLoggedIn based on token presence
+    }, []);
+
     return (
         <div className="navbar bg-green-500 text-white font-poppins">
             {/* Navbar Start */}
             <div className="navbar-start">
-                <a className="btn btn-ghost text-xl" onClick={() => navigate('/home')}>EComart</a>
+                <a className="btn btn-ghost text-xl" onClick={() => navigate('/home')}>Ecomart</a>
             </div>
 
             {/* Navbar Center */}
@@ -24,7 +30,7 @@ const Navbar = () => {
                     <li><a onClick={() => navigate('/aboutus')}>About Us</a></li>
                 </ul>
             </div>
-            {/* bidding */}
+
             {/* Navbar End */}
             <div className="navbar-end flex items-center space-x-4">
                 {/* Notification Button */}
@@ -50,7 +56,7 @@ const Navbar = () => {
 
                 {/* Cart Button */}
                 <div className="dropdown dropdown-end">
-                    <div tabIndex={0} role="button" className="btn btn-ghost btn-circle" onClick={() => navigate('/cart')}      >
+                    <div tabIndex={0} role="button" className="btn btn-ghost btn-circle" onClick={() => navigate('/cart')} >
                         <div className="indicator">
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
@@ -72,27 +78,27 @@ const Navbar = () => {
 
                 {/* Conditional Rendering */}
                 {isLoggedIn ? (
-        // If user is logged in, show profile picture
-        <div className="avatar">
-            <div
-                className="ring-primary ring-offset-base-100 w-10 rounded-full ring ring-offset-2 cursor-pointer"
-                onClick={() => navigate('/userprofile')}
-                role="button"
-                tabIndex={0}
-            >
-                <img
-                    src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
-                    alt="Profile"
-                />
-            </div>
-        </div>
+                    // If user is logged in, show profile picture
+                    <div className="avatar">
+                        <div
+                            className="ring-primary ring-offset-base-100 w-10 rounded-full ring ring-offset-2 cursor-pointer"
+                            onClick={() => navigate('/userprofile')}
+                            role="button"
+                            tabIndex={0}
+                        >
+                            <img
+                                src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
+                                alt="Profile"
+                            />
+                        </div>
+                    </div>
                 ) : (
                     // If user is not logged in, show login and sign-in buttons
                     <div>
-                        <button className="btn btn-active btn-ghost mr-2" onClick={() => setIsLoggedIn(true)}>
+                        <button className="btn btn-active btn-ghost mr-2" onClick={() => navigate('/login')}>
                             Login
                         </button>
-                        <button className="btn btn-active btn-ghost">
+                        <button className="btn btn-active btn-ghost" onClick={() => navigate('/signup')}>
                             Sign In
                         </button>
                     </div>

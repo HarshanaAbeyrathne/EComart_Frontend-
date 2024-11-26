@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 // compornents
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
-import SearchBar from '../components/searchBar';
+import SearchBar from '../components/SearchBar';
 import ItemDisplay from '../components/ItemDisplay';
 
 import homeImage from '../assets/images/home.png';
