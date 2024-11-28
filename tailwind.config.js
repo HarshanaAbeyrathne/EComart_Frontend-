@@ -1,5 +1,7 @@
 // tailwind.config.js
-module.exports = {
+const withMT = require("@material-tailwind/react/utils/withMT");
+
+module.exports = withMT({
   content: [
     "./index.html",
     "./src/**/*.{js,jsx,ts,tsx}",
@@ -8,10 +10,10 @@ module.exports = {
     extend: {
       colors: {
         customGreen: "#63bf47",
-    },
-    },
-    fontFamily: {
-      poppins: ['Poppins', 'sans-serif'],
+      },
+      fontFamily: {
+        poppins: ['Poppins', 'sans-serif'],
+      },
     },
   },
   plugins: [
@@ -20,4 +22,4 @@ module.exports = {
   daisyui: {
     themes: ["light", "dark", "cupcake"],
   },
-};
+});
