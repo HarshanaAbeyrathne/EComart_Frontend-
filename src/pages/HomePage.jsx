@@ -36,16 +36,16 @@ const HomePage = () => {
                         <div className="relative text-center text-white">
                             <Typography
                                 variant="h1"
-                                className="mb-4 text-3xl md:text-4xl lg:text-5xl"
+                                className="mb-4 pr-16 text-3xl md:text-4xl lg:text-5xl"
                             >
                                 Reusable and Recyclable Products 
                             </Typography>
                             <Typography
                                 variant="lead"
-                                className="mb-12 opacity-80"
+                                className="mb-12 opacity-80 "
                             >
-                                Welcome to EcoMart, Sri Lanka's top platform for buying, selling, and donating reusable and recyclable items. <br /> 
-                                Join us to declutter, find affordable secondhand products, and embrace sustainable living. <br />
+                                Welcome to EcoMart, Sri Lanka's top platform for buying, selling, and donating <br /> reusable and recyclable items. <br /> 
+                                Join us to declutter, find affordable secondhand products, <br />and embrace sustainable living. <br />
                                 Together, let's create a greener, cleaner future!                                      
                             </Typography>
                             <div className="flex justify-center gap-2">

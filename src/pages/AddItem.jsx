@@ -37,7 +37,7 @@ function AddItem() {
     // Create a FormData object for file upload
     const formDataToSubmit = new FormData();
     formDataToSubmit.append("title", formData.title);
-    formDataToSubmit.append("subtitle", formData.subtitle);
+    formDataToSubmit.append("subtitle", "");
     formDataToSubmit.append("category", formData.category);
     formDataToSubmit.append("description", formData.description);
     formDataToSubmit.append("quantity", formData.quantity);
@@ -115,7 +115,7 @@ function AddItem() {
               placeholder="Type your product title"
               className="input input-bordered w-full mb-4"
             />
-            <label className="block text-sm font-semibold mb-2">
+            {/* <label className="block text-sm font-semibold mb-2">
               Subtitle (optional) - LKR. 300
             </label>
             <input
@@ -125,22 +125,28 @@ function AddItem() {
               onChange={handleInputChange}
               placeholder="Add a subtitle"
               className="input input-bordered w-full"
-            />
+            /> */}
           </div>
 
           {/* Item Category */}
           <div className="mb-6">
-            <label className="block text-sm font-semibold mb-2">Item Category</label>
-            <div className="flex items-center justify-between">
-              <span className="text-gray-700">{formData.category}</span>
-              <button
-                type="button"
-                className="btn bg-green-300 hover:bg-green-400"
-              >
-                Edit
-              </button>
-            </div>
-          </div>
+      <label className="block text-sm font-semibold mb-2">Item Category</label>
+      <div className="flex items-center justify-between">
+        <input
+          type="text"
+           name="category"
+          className="text-gray-700 border rounded p-2"
+          value={formData.category}
+          onChange={handleInputChange}
+        />
+        {/* <button
+          type="button"
+          className="btn bg-green-300 hover:bg-green-400"
+        >
+          Edit
+        </button> */}
+      </div>
+    </div>
 
           {/* Product Description */}
           <div className="mb-6">
