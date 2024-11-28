@@ -16,7 +16,7 @@ function SearchBar() {
                 <img
                     src={homeImage}
                     alt="Ecomart Logo"
-                    className="w-12 h-12 object-contain"
+                    className="w-20 h-20 object-contain"
                 />
 
                 <div className="relative">

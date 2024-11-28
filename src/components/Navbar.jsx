@@ -24,6 +24,14 @@ const Navbar = () => {
     setShowNotificationModal(false);
   };
 
+  const handleLogOut = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("role");
+    setIsLoggedIn(false);
+    setRole(null);
+    navigate("/login");
+  }
+
   return (
     <div className="navbar bg-green-500 text-white font-poppins">
       {/* Navbar Start */}
@@ -53,6 +61,9 @@ const Navbar = () => {
           </li>
           <li>
             <a onClick={() => navigate("/bidding")}>Bidding</a>
+          </li>
+          <li>
+            <a onClick={() => navigate("/chat")}>Chat</a>
           </li>
           <li>
             <a onClick={() => navigate("/contactus")}>Contact Us</a>
@@ -115,11 +126,14 @@ const Navbar = () => {
 
         {/* Conditional Rendering */}
         {isLoggedIn ? (
-          // If user is logged in, show profile picture
+          <>
+          
           <div className="avatar">
+         
+
             <div
               className="ring-primary ring-offset-base-100 w-10 rounded-full ring ring-offset-2 cursor-pointer"
-              onClick={() => navigate("/userprofile")}
+              // onClick={() => navigate("/userprofile")}
               role="button"
               tabIndex={0}
             >
@@ -128,7 +142,15 @@ const Navbar = () => {
                 alt="Profile"
               />
             </div>
+          
           </div>
+          <button className="btn btn-active btn-ghost mr-2" onClick={handleLogOut}>
+                LogOut
+              </button>
+          </>
+          
+          // If user is logged in, show profile picture
+         
         ) : (
           // If user is not logged in, show login and sign-in buttons
           <div>
@@ -157,8 +179,8 @@ const Navbar = () => {
           tabIndex={0}
         >
           <div className="modal-box">
-            <h3 className="font-bold text-lg">Notifications</h3>
-            <p className="py-4">
+            <h3 className="font-bold text-lg text-black">Notifications</h3>
+            <p className="py-4 text-black">
               You have no new notifications at the moment.
             </p>
             <div className="modal-action">
