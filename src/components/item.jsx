@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 
 function Item({ title, description, price, image, onAddToCart }) {
   return (
-    <div className="card bg-white w-76 shadow-xl font-poppins">
+    <div className="card bg-green-50 w-76 shadow-xl font-poppins ">
       <figure className="px-10 pt-10">
         <img
           src={image || "https://via.placeholder.com/150"} // Fallback for missing image
