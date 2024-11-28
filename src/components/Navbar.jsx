@@ -7,20 +7,21 @@ const Navbar = () => {
   const [showNotificationModal, setShowNotificationModal] = useState(false); // Modal state
   const navigate = useNavigate();
 
-  // Check for token and role in localStorage on component mount
   useEffect(() => {
+    // Check for token in localStorage
     const token = localStorage.getItem("token");
-    const userRole = localStorage.getItem("role"); // Assume role is saved in localStorage
-    setIsLoggedIn(!!token);
-    setRole(userRole);
+    setIsLoggedIn(!!token); // Set isLoggedIn based on token presence
+
+    // Optionally, fetch and set role from localStorage or API
+    const userRole = localStorage.getItem("role");
+    if (userRole) {
+      setRole(userRole);
+    }
   }, []);
 
-  const handleNotificationClick = () => {
-    setShowNotificationModal(true); // Open the modal
-  };
-
+  // Function to handle modal close
   const handleCloseModal = () => {
-    setShowNotificationModal(false); // Close the modal
+    setShowNotificationModal(false);
   };
 
   return (
@@ -28,10 +29,10 @@ const Navbar = () => {
       {/* Navbar Start */}
       <div className="navbar-start">
         <a
-          className="btn btn-ghost text-xl"
+          className="btn btn-ghost text-xl cursor-pointer"
           onClick={() => navigate("/home")}
         >
-          EComart
+          Ecomart
         </a>
       </div>
 
@@ -53,14 +54,6 @@ const Navbar = () => {
           <li>
             <a onClick={() => navigate("/bidding")}>Bidding</a>
           </li>
-          {role === "buyer" && (
-            <li>
-              <a onClick={() => navigate("/orders")}>Orders</a>
-            </li>
-          )}
-          <li>
-            <a onClick={() => navigate("/chat")}>Chat</a>
-          </li>
           <li>
             <a onClick={() => navigate("/contactus")}>Contact Us</a>
           </li>
@@ -75,7 +68,7 @@ const Navbar = () => {
         {/* Notification Button */}
         <button
           className="btn btn-ghost btn-circle"
-          onClick={handleNotificationClick}
+          onClick={() => setShowNotificationModal(true)}
         >
           <div className="indicator">
             <svg
@@ -97,29 +90,26 @@ const Navbar = () => {
         </button>
 
         {/* Cart Button */}
-        <div className="dropdown dropdown-end">
-          <div
-            tabIndex={0}
-            role="button"
-            className="btn btn-ghost btn-circle"
-            onClick={() => navigate("/cart")}
-          >
-            <div className="indicator">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-5 w-5"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
-                />
-              </svg>
-            </div>
+        <div
+          className="btn btn-ghost btn-circle"
+          onClick={() => navigate("/cart")}
+          role="button"
+        >
+          <div className="indicator">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-5 w-5"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
+              />
+            </svg>
           </div>
         </div>
 
@@ -150,7 +140,7 @@ const Navbar = () => {
             </button>
             <button
               className="btn btn-active btn-ghost"
-              onClick={() => navigate("/signin")}
+              onClick={() => navigate("/signup")}
             >
               Sign In
             </button>

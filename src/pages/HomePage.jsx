@@ -1,14 +1,16 @@
-// src/pages/HomePage.jsx
 import React from 'react';
 import { useNavigate } from "react-router-dom";
+import { Carousel, Typography, Button } from "@material-tailwind/react";
 
-// compornents
+// Components
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
-import SearchBar from '../components/searchBar';
+import SearchBar from '../components/SearchBar';
 import ItemDisplay from '../components/ItemDisplay';
 
-import homeImage from '../assets/images/home.png';
+// Image Paths
+import homeImage from '../assets/images/slide1.png';
+import homeImage2 from '../assets/images/slide2.png';
 
 const HomePage = () => {
     const navigate = useNavigate();
@@ -19,40 +21,85 @@ const HomePage = () => {
             <SearchBar />
             <div className="container mx-auto px-4 py-16">
 
-                {/* Content Section */}
-                <div className="flex flex-col lg:flex-row items-center justify-between">
-                    {/* Text Content */}
-                    <div className="max-w-lg text-center lg:text-left">
-                        <h2 className="text-4xl font-bold mb-4 ml-7 text-green-500">
-                            SUSTAINABLE AND RECYCLE <br /> PRODUCTS
-                        </h2>
-                        <p className="text-gray-600 mb-6 ml-7">
-                            Ecomart emphasizes the reuse and upcycling of garments, giving them a
-                            new lease of life. On the other hand, upcycling transforms old or
-                            discarded materials into new products with higher value.
-                        </p>
-                        <div className="flex justify-center lg:justify-start space-x-4 ml-7">
-                            <button className="btn btn-outline btn-accent" onClick={() => navigate('/login')}>Sell now</button>
-                            <button className="btn btn-success text-white" onClick={() => navigate('/login')}>Buy now</button>
-                        </div>
-                    </div>
-
-                    {/* Image */}
-                    <div className="mt-8 lg:mt-0 lg:mr-20">
+                {/* Carousel Section */}
+                <Carousel className="rounded-xl">
+                    <div className="relative w-screen h-96 flex items-center justify-center">
+                        {/* Background Image */}
                         <img
                             src={homeImage}
-                            alt="Sustainable Products"
-                            className="max-w-full h-auto"
+                            alt="Slide 1"
+                            className="absolute w-screen h-full object-cover"
                         />
+                        {/* Dark Overlay */}
+                        <div className="absolute inset-0 bg-black/50"></div>
+                        {/* Text Content */}
+                        <div className="relative text-center text-white">
+                            <Typography
+                                variant="h1"
+                                className="mb-4 text-3xl md:text-4xl lg:text-5xl"
+                            >
+                                SUSTAINABLE AND RECYCLE PRODUCTS
+                            </Typography>
+                            <Typography
+                                variant="lead"
+                                className="mb-12 opacity-80"
+                            >
+                                Ecomart emphasizes the reuse and upcycling of garments, giving them a
+                                new lease of life. <br /> On the other hand, upcycling transforms old or
+                                discarded materials into new products with higher value.
+                            </Typography>
+                            <div className="flex justify-center gap-2">
+                                <Button size="lg" color="white" onClick={() => navigate('/login')}>
+                                    Sell Now
+                                </Button>
+                                <Button size="lg" color="white" variant="text" onClick={() => navigate('/login')}>
+                                    Buy Now
+                                </Button>
+                            </div>
+                        </div>
                     </div>
-                </div>
+                    <div className="relative w-screen h-96 flex items-center justify-center">
+                        {/* Background Image */}
+                        <img
+                            src={homeImage2}
+                            alt="Slide 2"
+                            className="absolute w-screen h-full object-cover"
+                        />
+                        {/* Dark Overlay */}
+                        <div className="absolute inset-0 bg-black/50"></div>
+                        {/* Text Content */}
+                        <div className="relative text-center text-white">
+                            <Typography
+                                variant="h1"
+                                className="mb-4 text-3xl md:text-4xl lg:text-5xl"
+                            >
+                                TRANSFORMING OLD TO NEW
+                            </Typography>
+                            <Typography
+                                variant="lead"
+                                className="mb-12 opacity-80"
+                            >
+                                Our mission is to create new opportunities from discarded materials, <br />
+                                elevating them into something of greater value and sustainability.
+                            </Typography>
+                            <div className="flex justify-center gap-2">
+                                <Button size="lg" color="white" onClick={() => navigate('/login')}>
+                                    Explore More
+                                </Button>
+                                <Button size="lg" color="white" variant="text" onClick={() => navigate('/aboutus')}>
+                                    Learn More
+                                </Button>
+                            </div>
+                        </div>
+                    </div>
+                </Carousel>
+
             </div>
 
-            {/* items */}
-            <h1 className="text-2xl font-bold text-center mb-8 bg-green-100">Most Recent Products</h1>
+            {/* Items Section */}
+            <h1 className="text-2xl font-bold text-center mb-8 ">Most Recent Products</h1>
+            <ItemDisplay />
 
-            <ItemDisplay/>
-                
             {/* Footer */}
             <Footer />
         </div>
