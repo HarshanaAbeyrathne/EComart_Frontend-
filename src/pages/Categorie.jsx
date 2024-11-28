@@ -1,40 +1,73 @@
-import React, { useState, useEffect } from 'react';
-import Navbar from '../components/Navbar';
-import Footer from '../components/Footer';
-import ItemDisplay from '../components/ItemDisplay';
-import axiosInstance from '../axiosInstance';
+import React, { useState, useEffect } from "react";
+import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
+import ItemDisplay from "../components/ItemDisplay";
+import axiosInstance from "../axiosInstance";
+
+const categories = {
+  Fashion: [
+    "Men’s Clothing",
+    "Women’s Clothing",
+    "Kids’ Wear",
+    "Footwear",
+    "Accessories",
+  ],
+  Electronics: [
+    "Mobile Phones & Accessories",
+    "Computers & Tablets",
+    "Home Appliances",
+    "Cameras & Photography",
+    "Audio & Headphones",
+  ],
+  Home: [
+    "Furniture",
+    "Kitchen & Dining",
+    "Home Decor",
+    "Bedding & Bath",
+    "Cleaning Supplies",
+  ],
+  Toys: [
+    "Educational Toys",
+    "Action Figures",
+    "Dolls & Plush Toys",
+    "Outdoor & Sports Toys",
+    "Puzzles & Board Games",
+  ],
+  Books: [
+    "Fiction",
+    "Non-Fiction",
+    "Children’s Books",
+    "Educational & Textbooks",
+    "Self-Help & Personal Developments",
+  ],
+};
 
 function Categorie() {
   const [filters, setFilters] = useState({
-    categories: [],
-    price: '',
+    subcategories: [],
+    price: "",
     buyMethod: [],
-    shipping: []
+    shipping: [],
   });
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  // Fetch items based on filters
   const fetchItems = async () => {
     setLoading(true);
     setError(null);
     try {
-      // Axios handles the response parsing automatically
-      const response = await axiosInstance.get('/item');
-      console.log(response.data);
-      // Assuming the backend returns { items: [...] } in the response
+      const response = await axiosInstance.get("/item", {
+        params: filters,
+      });
       setItems(response.data);
     } catch (err) {
-      // Use Axios' error object for detailed error information
-      setError(err.response?.data?.message || 'Failed to fetch items');
+      setError(err.response?.data?.message || "Failed to fetch items");
     } finally {
       setLoading(false);
     }
   };
-  
 
-  // Handle checkbox changes
   const handleCheckboxChange = (e, filterType) => {
     const { value, checked } = e.target;
     setFilters((prevFilters) => {
@@ -45,60 +78,52 @@ function Categorie() {
     });
   };
 
-  // Handle price changes
   const handlePriceChange = (e) => {
     setFilters({ ...filters, price: e.target.value });
   };
 
-  // Handle apply filters button click
   const handleApplyFilters = () => {
-    fetchItems(); // Fetch items from the backend when filters are applied
+    fetchItems();
   };
 
-  // Initial fetch without filters
   useEffect(() => {
     fetchItems();
   }, []);
 
   return (
-    <div className='font-poppins'>
+    <div className="font-poppins">
       <Navbar />
       <div className="flex">
-        {/* Sidebar for filters */}
+        {/* Sidebar */}
         <div className="w-1/4 p-4 bg-gray-100 sticky top-0 h-screen overflow-y-auto">
           <h2 className="text-xl font-bold mb-4">Filters</h2>
           <div className="mb-4">
             <h3 className="text-lg font-semibold">Categories</h3>
-            <ul>
-              <li>
-                <input
-                  type="checkbox"
-                  value="Category 1"
-                  onChange={(e) => handleCheckboxChange(e, 'categories')}
-                />{' '}
-                Category 1
-              </li>
-              <li>
-                <input
-                  type="checkbox"
-                  value="Category 2"
-                  onChange={(e) => handleCheckboxChange(e, 'categories')}
-                />{' '}
-                Category 2
-              </li>
-              <li>
-                <input
-                  type="checkbox"
-                  value="Category 3"
-                  onChange={(e) => handleCheckboxChange(e, 'categories')}
-                />{' '}
-                Category 3
-              </li>
-            </ul>
+            {Object.keys(categories).map((mainCategory) => (
+              <div key={mainCategory} className="mb-4">
+                <h4 className="font-semibold mb-2">{mainCategory}</h4>
+                <ul>
+                  {categories[mainCategory].map((subcategory) => (
+                    <li key={subcategory} className="mb-2">
+                      <input
+                        type="checkbox"
+                        value={subcategory}
+                        onChange={(e) => handleCheckboxChange(e, "subcategories")}
+                        className="mr-2"
+                      />
+                      {subcategory}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
           </div>
           <div className="mb-4">
             <h3 className="text-lg font-semibold">Price</h3>
-            <select className="select select-bordered w-full" onChange={handlePriceChange}>
+            <select
+              className="select select-bordered w-full"
+              onChange={handlePriceChange}
+            >
               <option value="">Select Price Range</option>
               <option value="0-100">$0 - $100</option>
               <option value="100-500">$100 - $500</option>
@@ -112,16 +137,18 @@ function Categorie() {
                 <input
                   type="checkbox"
                   value="Buy Now"
-                  onChange={(e) => handleCheckboxChange(e, 'buyMethod')}
-                />{' '}
+                  onChange={(e) => handleCheckboxChange(e, "buyMethod")}
+                  className="mr-2"
+                />
                 Buy Now
               </li>
               <li>
                 <input
                   type="checkbox"
                   value="Auction"
-                  onChange={(e) => handleCheckboxChange(e, 'buyMethod')}
-                />{' '}
+                  onChange={(e) => handleCheckboxChange(e, "buyMethod")}
+                  className="mr-2"
+                />
                 Auction
               </li>
             </ul>
@@ -133,16 +160,18 @@ function Categorie() {
                 <input
                   type="checkbox"
                   value="Free Shipping"
-                  onChange={(e) => handleCheckboxChange(e, 'shipping')}
-                />{' '}
+                  onChange={(e) => handleCheckboxChange(e, "shipping")}
+                  className="mr-2"
+                />
                 Free Shipping
               </li>
               <li>
                 <input
                   type="checkbox"
                   value="Paid Shipping"
-                  onChange={(e) => handleCheckboxChange(e, 'shipping')}
-                />{' '}
+                  onChange={(e) => handleCheckboxChange(e, "shipping")}
+                  className="mr-2"
+                />
                 Paid Shipping
               </li>
             </ul>
@@ -155,7 +184,7 @@ function Categorie() {
           </button>
         </div>
 
-        {/* Main content area */}
+        {/* Main Content */}
         <div className="w-3/4 p-4 overflow-y-auto h-screen">
           <h2 className="text-2xl font-bold mb-4">Categories</h2>
           {loading ? (

@@ -3,7 +3,7 @@ import axiosInstance from "../axiosInstance";
 import image3 from "../assets/images/ecomart_logo.png"; // Adjust the path based on your file structure
 
 function VerifyAccount() {
-  const [otp, setOtp] = useState(new Array(6).fill("")); // State to store OTP
+  const [otp, setOtp] = useState(new Array(5).fill("")); // State to store OTP
   const [error, setError] = useState(null); // Error state
   const [success, setSuccess] = useState(null); // Success state
 
@@ -42,7 +42,7 @@ function VerifyAccount() {
         localStorage.setItem("role", response.data.role);
         localStorage.setItem("name", response.data.username); 
         setTimeout(() => {
-          window.location.href = "/dashboard";
+          window.location.href = "/home";
         }, 1000);
       }
     } catch (err) {
