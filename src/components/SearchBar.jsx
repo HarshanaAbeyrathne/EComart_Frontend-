@@ -113,19 +113,24 @@ function SearchBar() {
                         </svg>
                     </button>
                 </div>
-            </div>
 
-            {/* Dropdown Section */}
-            <div className="flex items-center text-white">
-                <select className="border px-3 py-2 rounded focus:outline-none bg-green-500">
-                <option value="" disabled>Categories</option>
-                    <option value="electronics">Electronics</option>
-                    <option value="home">Home & Garden</option>
-                    <option value="fashion">Fashion</option>
-                    <option value="toys">Toys</option>
-                    <option value="sport">Sports Goods</option>
-                    <option value="jewelries">Jewelries</option>
-                </select>
+                {/* Dropdown Section */}
+                <div className="flex items-center">
+    <select
+        className="border px-3 py-2 rounded focus:outline-none bg-green-500 text-white"
+        defaultValue=""
+    >
+        <option value="" disabled>
+            Categories
+        </option>
+        <option value="electronics">Electronics</option>
+        <option value="home">Home & Garden</option>
+        <option value="fashion">Fashion</option>
+        <option value="toys">Toys</option>
+        <option value="sport">Sports Goods</option>
+        <option value="jewelries">Jewelries</option>
+    </select>
+</div>
             </div>
         </div>
     );

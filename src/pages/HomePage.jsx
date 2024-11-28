@@ -38,15 +38,15 @@ const HomePage = () => {
                                 variant="h1"
                                 className="mb-4 text-3xl md:text-4xl lg:text-5xl"
                             >
-                                SUSTAINABLE AND RECYCLE PRODUCTS
+                                Reusable and Recyclable Products 
                             </Typography>
                             <Typography
                                 variant="lead"
                                 className="mb-12 opacity-80"
                             >
-                                Ecomart emphasizes the reuse and upcycling of garments, giving them a
-                                new lease of life. <br /> On the other hand, upcycling transforms old or
-                                discarded materials into new products with higher value.
+                                Welcome to EcoMart, Sri Lanka's top platform for buying, selling, and donating reusable and recyclable items. <br /> 
+                                Join us to declutter, find affordable secondhand products, and embrace sustainable living. <br />
+                                Together, let's create a greener, cleaner future!                                      
                             </Typography>
                             <div className="flex justify-center gap-2">
                                 <Button size="lg" color="white" onClick={() => navigate('/login')}>
