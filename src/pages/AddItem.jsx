@@ -58,7 +58,7 @@ function AddItem() {
           category: "Fashion > Men's Clothes",
           description: "",
           quantity: "",
-          pricingType: "fixed",
+          pricingType: "",
           price: "",
           photo: null,
         });

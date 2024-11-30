@@ -90,6 +90,8 @@ function Categorie() {
     fetchItems();
   }, []);
 
+  // console.log(items.pricingType);
+
   return (
     <div className="font-poppins">
       <Navbar />
@@ -194,7 +196,9 @@ function Categorie() {
           ) : items.length === 0 ? (
             <p className="text-gray-500">No items found</p>
           ) : (
-            <ItemDisplay items={items} />
+            <ItemDisplay items={items.filter((item) => item.pricingType !== "auction")} />
+
+            
           )}
         </div>
       </div>
