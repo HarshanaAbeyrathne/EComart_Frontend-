@@ -19,6 +19,8 @@ import Cart from './pages/Cart';
 import Bidding from './pages/AuctionItems';
 import Orders from './pages/Orders';
 import Chat from './pages/Chat';
+import ItemDetail from './pages/ItemDetail';
+import BlogPage from './pages/BlogPage';
 
 const App = () => {
     return (
@@ -40,6 +42,8 @@ const App = () => {
                 <Route path="/bidding" element={<Bidding/>} />
                 <Route path="/orders" element={<Orders/>} />
                 <Route path="/chat" element={<Chat/>} />
+                <Route path="/item/:id" element={<ItemDetail/>} />
+                <Route path="/blog" element={<BlogPage/>} />
                 {/* <Route path="/about" element={<h1>About</h1>} /> */}
             </Routes>
         </BrowserRouter>
